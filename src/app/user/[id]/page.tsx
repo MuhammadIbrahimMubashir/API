@@ -22,7 +22,7 @@ async function getUserData(id: string) {
 
 // UserProfile page component (Server Component)
 export default async function UserProfile({ params }: { params: { id: string } }) {
-  // Ensure that the params object is correctly destructured
+  // Fetch user data using params.id
   const user = await getUserData(params.id);
 
   return (
