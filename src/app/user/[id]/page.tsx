@@ -13,12 +13,23 @@ export async function generateStaticParams() {
 }
 
 // Fetch user data for the profile page
-export default async function UserProfile({ params }: { params: { id: string } }) {
+export default function UserProfile({ params }: { params: { id: string } }) {
   const { id } = params; // Destructure params to get the id
 
-  // Ensure that params.id is awaited and used
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-  const user = await res.json();
+  // Fetch user data for the specific user ID
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function fetchUserData() {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+      const data = await res.json();
+      setUser(data);
+    }
+
+    fetchUserData();
+  }, [id]);
+
+  if (!user) return <p>Loading...</p>;
 
   return (
     <div className="container mx-auto p-6 bg-gray-100 min-h-screen flex flex-col items-center">
