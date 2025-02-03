@@ -14,14 +14,23 @@ export async function generateStaticParams() {
   }));
 }
 
-// UserProfile page component
-export default async function UserProfile({ params }: { params: { id: string } }) {
+// Fetch user data for the profile page at request time
+export async function getServerSideProps({ params }: { params: { id: string } }) {
   const { id } = params; // Destructure params to get the id
 
   // Fetch user data for the specific user ID
   const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
   const user = await res.json();
 
+  return {
+    props: {
+      user,
+    },
+  };
+}
+
+// UserProfile page component
+export default function UserProfile({ user }: { user: any }) {
   return (
     <div className="container mx-auto p-6 bg-gray-100 min-h-screen flex flex-col items-center">
       <div className="bg-white p-6 rounded-lg shadow-md border w-full max-w-md">
