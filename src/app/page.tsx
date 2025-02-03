@@ -18,6 +18,8 @@ export default async function Home() {
             <h2 className="text-xl font-semibold text-gray-900">{user.name}</h2>
             <p className="text-gray-700">Username: {user.username}</p>
             <p className="text-gray-500">Email: {user.email}</p>
+            <p className="text-gray-500">Phone: {user.phone}</p>
+            <p className="text-gray-500">Website: {user.website}</p>
             <Link href='/' className="text-blue-600 hover:underline mt-2 inline-block">
               View Profile
             </Link>
