@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 interface User {
@@ -11,22 +12,25 @@ interface User {
   website: string;
 }
 
-// UserProfile component
-export default function UserProfile({ params }: { params: { id: string } }) {
+export default function UserProfile() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
-    // Fetch user data when component mounts
-    async function fetchUserData() {
-      const res = await fetch(`https://jsonplaceholder.typicode.com/users/${params.id}`);
-      const data = await res.json();
-      setUser(data);
-      setLoading(false);
-    }
+    const { id } = router.query; // Get the dynamic parameter 'id' from the URL
 
-    fetchUserData();
-  }, [params.id]);
+    if (id) {
+      async function fetchUserData() {
+        const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+        const data = await res.json();
+        setUser(data);
+        setLoading(false);
+      }
+
+      fetchUserData();
+    }
+  }, [router.query]); // Rerun when the router.query changes (i.e., when the ID changes)
 
   // Display loading state until the data is fetched
   if (loading) {
