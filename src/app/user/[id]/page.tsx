@@ -9,7 +9,9 @@ async function getUsers() {
 // Generate static params for dynamic routes
 export async function generateStaticParams() {
   const users = await getUsers();
-  return users.map((user: { id: number }) => ({ id: user.id.toString() }));
+  return users.map((user: { id: number }) => ({
+    id: user.id.toString(),
+  }));
 }
 
 // UserProfile page component
