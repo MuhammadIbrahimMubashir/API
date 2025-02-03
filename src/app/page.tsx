@@ -13,7 +13,7 @@ export default async function Home() {
       <title>API Data Fetch</title>
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">User List</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {users.map((user: { id: number; name: string; email: string; username: string }) => (
+        {users.map((user: { id: number; phone: number; website: string; name: string; email: string; username: string }) => (
           <div key={user.id} className="bg-white p-6 rounded-lg shadow-md border">
             <h2 className="text-xl font-semibold text-gray-900">{user.name}</h2>
             <p className="text-gray-700">Username: {user.username}</p>
