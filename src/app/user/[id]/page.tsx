@@ -21,7 +21,7 @@ async function fetchUserData(id: string) {
 }
 
 // Main component for rendering user profile
-export default async function UserProfile({ params }: { params: any }) {
+export default async function UserProfile({ params }: { params: { [key: string]: string } }) {
   // Fetch user data based on the ID from URL
   const user = await fetchUserData(params.id);
 
